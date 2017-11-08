@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     bool enemiesMoving;
     public int EnemyCount { get { return enemies.Count; } }
 
-    BoardManager boardManager;
+    Board.BoardManager boardManager;
 
     int seed;
 
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
-        boardManager = GetComponent<BoardManager>();
+        boardManager = GetComponent<Board.BoardManager>();
 
         if (string.IsNullOrEmpty(seedString))
             seedString = System.DateTime.UtcNow.ToString();

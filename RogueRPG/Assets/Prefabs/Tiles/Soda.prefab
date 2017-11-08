@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4773053207443928}
   - component: {fileID: 212828329011429602}
   - component: {fileID: 61028454005010134}
+  - component: {fileID: 114663737975073486}
   m_Layer: 0
   m_Name: Soda
   m_TagString: Soda
@@ -55,6 +56,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &114663737975073486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950604708809162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfff8c60e94344d79ef151d90b9d701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212828329011429602
 SpriteRenderer:
   m_ObjectHideFlags: 1

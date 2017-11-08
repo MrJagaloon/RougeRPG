@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212767578276630064}
   - component: {fileID: 61987986297797482}
   - component: {fileID: 114226767472836178}
+  - component: {fileID: 114672801640252118}
   m_Layer: 8
   m_Name: Wall7
   m_TagString: Untagged
@@ -69,6 +70,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagedSprite: {fileID: 21300106, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
   hp: 4
+--- !u!114 &114672801640252118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299544180380978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc9b29d69798422d9f578781a37e2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212767578276630064
 SpriteRenderer:
   m_ObjectHideFlags: 1
