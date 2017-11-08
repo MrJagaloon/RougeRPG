@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1998999139519572}
+  m_IsPrefabParent: 1
+--- !u!1 &1998999139519572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4093674483854218}
+  - component: {fileID: 114964878994426084}
+  - component: {fileID: 114698790979752468}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4093674483854218
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1998999139519572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114698790979752468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1998999139519572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e23b869ad4438eb9d6209e6e6c96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEdgeSize: 64
+  maxAspectRatio: 2
+  enemySpawnAttempts: 100
+  exitTiles:
+  - {fileID: 1283729602775716, guid: 4875bdb86f6aa435486396b10d8dc452, type: 2}
+  floorTiles:
+  - {fileID: 1795368879777020, guid: a9e9545fbcc42425e9dacac4c3e577cd, type: 2}
+  - {fileID: 1649899732570756, guid: 02014b6912deb45389acdff04161431b, type: 2}
+  - {fileID: 1028770936543174, guid: a75a7052b4bae45738144f9e02e75435, type: 2}
+  - {fileID: 1035201036337604, guid: 76638c2797beb4837a85ac7bdf0685f7, type: 2}
+  - {fileID: 1373889221128930, guid: 01caccda2e67c47eca3350d20fff986d, type: 2}
+  - {fileID: 1339699198816672, guid: e2dc8b5a9179f4a74a54683034d4533f, type: 2}
+  - {fileID: 1543502266740744, guid: a946a086917a94479be4547859ea7aa9, type: 2}
+  - {fileID: 1760598297091466, guid: 93a13536d5c3741f09c91538609c9cfb, type: 2}
+  wallTiles:
+  - {fileID: 1127815607849366, guid: 909c02b9b03464948bc04647f09b1de1, type: 2}
+  - {fileID: 1020589812073918, guid: 448534a7e23f044629d1c3b4de6c0bfc, type: 2}
+  - {fileID: 1313738352127774, guid: a738461be7eb74b33880ce46ac35777c, type: 2}
+  - {fileID: 1785949154977970, guid: ee9d2a082b8ee4a5db93f0bb42835f83, type: 2}
+  - {fileID: 1551155543010026, guid: dd5a8a4a4e62f4594a6223baa9051173, type: 2}
+  - {fileID: 1995524423404284, guid: debac7b19851e414cbf018f6bdf058f1, type: 2}
+  - {fileID: 1299544180380978, guid: 216a0c9a72f874eae98258973212246c, type: 2}
+  - {fileID: 1664997137280806, guid: fca910ccdbdd444969ae3507291ca029, type: 2}
+  outerWallTiles:
+  - {fileID: 1601072691426554, guid: 89266ed86ec3d4e98a20ca644b4cb953, type: 2}
+  - {fileID: 1540909793484260, guid: 947154859fe4b48419275dbabbfeb3ff, type: 2}
+  - {fileID: 1266703447135384, guid: 59ba86453b3dd43718a0e1c15fdce151, type: 2}
+  foodTiles:
+  - {fileID: 1904733593880476, guid: 15faa88951e8c4d0cadd04f44a91aaeb, type: 2}
+  - {fileID: 1950604708809162, guid: 4cce4c1c577ad481b93693865460a525, type: 2}
+  enemyTiles:
+  - {fileID: 1820174669036892, guid: 817189b4de5774536a5b12329fee9fb3, type: 2}
+  - {fileID: 1776708960903746, guid: e7eacf301b7ba4bdb90495cacda6ea47, type: 2}
+  wallMap:
+    ticks: 3
+    generateZones: 1
+    pruneZones: 1
+    connectZonesToMain: 1
+    minEmptyZoneSize: 16
+    emptyStepCost: 1
+    filledStepCost: 4
+    fillChance: 50
+    fillRules:
+      ruleType: 8
+      rules: 000000000001010101
+    stayFilledRules:
+      ruleType: 8
+      rules: 000000000101010101
+--- !u!114 &114964878994426084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1998999139519572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d5c6560cd1046d0b30b73cc236850d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  difficulty: 4
+  seedString: 4
+  levelStartDelay: 2
+  nextLevelDelay: 1
+  turnDelay: 0.1
+  playerHealth: 500
+  playerPrefab: {fileID: 1700324380147446, guid: f0f388a6b780946988fdad54e780fb1e,
+    type: 2}
+  playerInstance: {fileID: 0}
+  playerScript: {fileID: 0}
+  camSize: 12.5
+  camSizeRange:
+    min: 2
+    max: 32
+  zoomSpeed: 25
+  playersTurn: 1
