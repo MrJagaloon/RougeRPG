@@ -6,43 +6,8 @@ namespace Board
     [RequireComponent(typeof(Transform))]
     public class Cell : MonoBehaviour
     {
-        int _x;
-        int _y;
-
-        public int x 
-        { 
-            get { return _x; }
-            set 
-            { 
-                _x = value;
-                Vector3 newPos = transform.position;
-                newPos.x = _x;
-                transform.position = newPos;
-                gameObject.name = "Cell(" + x + ", " + y + ")";
-            }
-        }
-        public int y
-        {
-            get { return _y; }
-            set
-            {
-                _y = value;
-                Vector3 newPos = transform.position;
-                newPos.y = _y;
-                transform.position = newPos;
-                gameObject.name = "Cell(" + x + ", " + y + ")";
-            }
-        }
-
-        public static Cell NewCell(int x, int y)
-        {
-            GameObject cellGO = new GameObject();
-            Cell cell = cellGO.AddComponent<Cell>();
-            cell.x = x;
-            cell.y = y;
-            cell.tiles = new List<Tile>();
-            return cell;
-        }
+        public int x { get; private set; }
+        public int y { get; private set; }
 
         public int zoneNumber;
 
@@ -54,9 +19,21 @@ namespace Board
             set { tiles[i] = value; }
         }
 
+        public static Cell NewCell(int x, int y)
+        {
+            GameObject cellGO = new GameObject("Cell(" + x + ", " + y + ")");
+            Cell cell = cellGO.AddComponent<Cell>();
+            cell.x = x;
+            cell.y = y;
+            cell.tiles = new List<Tile>();
+            cell.transform.position = new Vector3(x, y, 0f);
+            return cell;
+        }
+
         public void AddTile(Tile tile, bool moveToCell = false)
         {
             tiles.Add(tile);
+            tile.transform.parent = transform;
             if (moveToCell)
                 tile.transform.position = transform.position;
         }

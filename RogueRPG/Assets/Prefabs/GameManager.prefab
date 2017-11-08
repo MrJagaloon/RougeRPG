@@ -52,8 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357e23b869ad4438eb9d6209e6e6c96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEdgeSize: 64
+  maxEdgeSize: 32
   maxAspectRatio: 2
+  edgeSize: 5
+  outerWallChance: 0
   enemySpawnAttempts: 100
   exitTiles:
   - {fileID: 1283729602775716, guid: 4875bdb86f6aa435486396b10d8dc452, type: 2}
