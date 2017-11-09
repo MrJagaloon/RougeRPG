@@ -1,19 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TileMapGen
+namespace TileMapLib
 {
     [RequireComponent(typeof(Transform))]
-    public abstract class Tile : MonoBehaviour
+    public class Tile : MonoBehaviour
     {
+        [HideInInspector]
         public TileSlot slot;
 
-        public Sprite sprite;
-
-        public virtual void ChangeSlots(TileSlot newSlot)
+        public void ChangeSlots(TileSlot newSlot)
         {
+            if (slot != null)
+                slot.RemoveTile(this);
             slot = newSlot;
-            transform.position = slot.position;
+            transform.position = newSlot.position.ToVector2();
+            transform.parent = slot.transform;
         }
     }
 }

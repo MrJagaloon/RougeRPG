@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4829676508903208}
   - component: {fileID: 212443428346685128}
-  - component: {fileID: 114051312550014894}
+  - component: {fileID: 114600656840724604}
   m_Layer: 0
   m_Name: Floor3
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114051312550014894
+--- !u!114 &114600656840724604
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfff8c60e94344d79ef151d90b9d701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!212 &212443428346685128
 SpriteRenderer:
   m_ObjectHideFlags: 1

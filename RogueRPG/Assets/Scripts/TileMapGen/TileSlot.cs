@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace TileMapGen
+namespace TileMapLib
 {
     [RequireComponent(typeof(Transform))]
     public class TileSlot : MonoBehaviour
     {
         public IntPoint2 position;
 
-        public Zone currentZone;
+        public TileSlotZone zone;
 
         public List<Tile> tiles;
         public int Count { get { return tiles.Count; } }
@@ -21,23 +21,21 @@ namespace TileMapGen
         public static TileSlot NewTileSlot(IntPoint2 position)
         {
             GameObject cellGO = new GameObject(string.Format("TileSlot({0}, {1})", position.x, position.y));
-            TileSlot cell = cellGO.AddComponent<TileSlot>();
-            cell.position = position;
-            cell.tiles = new List<Tile>();
-            cell.transform.position = new Vector3(x, y, 0f);
-            return cell;
+            TileSlot slot = cellGO.AddComponent<TileSlot>();
+            slot.position = position;
+            slot.tiles = new List<Tile>();
+            slot.transform.position = new Vector3(position.x, position.y, 0f);
+            return slot;
         }
         public static TileSlot NewCell(int x, int y)
         {
-            return NewCell(new IntPoint2(x, y));
+            return NewTileSlot(new IntPoint2(x, y));
         }
 
         public void AddTile(Tile tile)
         {
             tiles.Add(tile);
-            tile.ChangedCell(this);     // TODO: implement tile.ChangedTile into tile base class
-            tile.cell = this;
-            tile.transform.parent = transform;
+            tile.ChangeSlots(this);     // TODO: implement tile.ChangedTile into tile base class
         }
 
         public void RemoveTile(Tile tile)
@@ -47,6 +45,9 @@ namespace TileMapGen
             // Check that the tile was in the list.
             if (wasRemoved == false)
                 throw new System.Exception("tile");
+
+            tile.slot = null;
+            tile.transform.parent = null;
         }
 
         public void RemoveTileAt(int i)
@@ -71,17 +72,20 @@ namespace TileMapGen
 
             TileSlot otherCell = (TileSlot)other;
 
-            return x == otherCell.x && y == otherCell.y;
+            return position.x == otherCell.position.x && position.y == otherCell.position.y;
         }
 
         public override int GetHashCode()
         {
+            int x = position.x;
+            int y = position.y;
+
             return x * y + (x + 1) * (y + 1) * (y + 2);
         }
 
         public override string ToString()
         {
-            return string.Format("[Cell: ({0}, {1})]", x, y);
+            return string.Format("[Cell: ({0}, {1})]", position.x, position.y);
         }
     }
 }

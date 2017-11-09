@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4921918061235594}
   - component: {fileID: 212229888699417756}
-  - component: {fileID: 114083208015463276}
+  - component: {fileID: 114627167395919834}
   m_Layer: 0
   m_Name: Floor6
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114083208015463276
+--- !u!114 &114627167395919834
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfff8c60e94344d79ef151d90b9d701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!212 &212229888699417756
 SpriteRenderer:
   m_ObjectHideFlags: 1

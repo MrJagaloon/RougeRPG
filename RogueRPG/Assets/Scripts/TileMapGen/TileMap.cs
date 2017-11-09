@@ -1,14 +1,16 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
-namespace TileMapGen
+namespace TileMapLib
 {
     public class TileMap
     {
-        readonly TileSlot _slots;
+        readonly TileSlot[][] _slots;
         int _rows;
         int _cols;
 
-        public TileSlot[] this[int i] { get { return slots[i]; } }
+        public List<object> baseMaps;
+
+        public TileSlot[] this[int i] { get { return _slots[i]; } }
         public int Rows { get { return _rows; } }
         public int Cols { get { return _cols; } }
 
@@ -27,6 +29,8 @@ namespace TileMapGen
                     _slots[x][y] = TileSlot.NewTileSlot(position);
                 }
             }
+
+            baseMaps = new List<object>();
         }
     }
 }

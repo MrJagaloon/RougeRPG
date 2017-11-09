@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 4139683603547716}
   - component: {fileID: 212374094778088922}
   - component: {fileID: 61826445978372990}
-  - component: {fileID: 114064053020543228}
-  - component: {fileID: 114542115953982116}
+  - component: {fileID: 114105917173163346}
   m_Layer: 8
   m_Name: Wall3
   m_TagString: Untagged
@@ -57,7 +56,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &114064053020543228
+--- !u!114 &114105917173163346
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,23 +64,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1313738352127774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3521df0267624f3999aa72198de4720, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dfff8c60e94344d79ef151d90b9d701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagedSprite: {fileID: 21300100, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
-  hp: 100
---- !u!114 &114542115953982116
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1313738352127774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc9b29d69798422d9f578781a37e2ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isBlocking: 1
+  slot: {fileID: 0}
 --- !u!212 &212374094778088922
 SpriteRenderer:
   m_ObjectHideFlags: 1

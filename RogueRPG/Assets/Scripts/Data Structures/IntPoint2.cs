@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 public struct IntPoint2
 {
     public int x;
@@ -34,6 +35,16 @@ public struct IntPoint2
     {
         this.x = x;
         this.y = y;
+    }
+
+    public Vector2 ToVector2()
+    {
+        return new Vector2(x, y);
+    }
+
+    public override string ToString()
+    {
+        return string.Format("(x={0}, y={1}]", x, y);
     }
 
     public override bool Equals(object obj)
