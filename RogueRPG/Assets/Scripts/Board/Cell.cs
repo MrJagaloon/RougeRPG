@@ -6,10 +6,9 @@ namespace Board
     [RequireComponent(typeof(Transform))]
     public class Cell : MonoBehaviour
     {
-        public int x { get; private set; }
-        public int y { get; private set; }
+        public IntPoint2 position;
 
-        public int zoneNumber;
+        public Zone currentZone;
 
         public List<Tile> tiles;
         public int Count { get { return tiles.Count; } }
@@ -19,34 +18,26 @@ namespace Board
             set { tiles[i] = value; }
         }
 
-        public bool IsBlocking 
+        public static Cell NewCell(IntPoint2 position)
         {
-            get
-            {
-                foreach (Tile t in tiles)
-                    if (t.isBlocking) return true;
-                return false;
-            }
-        }
-
-        public static Cell NewCell(int x, int y)
-        {
-            GameObject cellGO = new GameObject("Cell(" + x + ", " + y + ")");
+            GameObject cellGO = new GameObject(string.Format("Cell({0}, {1})", position.x, position.y));
             Cell cell = cellGO.AddComponent<Cell>();
-            cell.x = x;
-            cell.y = y;
+            cell.position = position;
             cell.tiles = new List<Tile>();
             cell.transform.position = new Vector3(x, y, 0f);
             return cell;
         }
+        public static Cell NewCell(int x, int y)
+        {
+            return NewCell(new IntPoint2(x, y));
+        }
 
-        public void AddTile(Tile tile, bool moveToCell = true)
+        public void AddTile(Tile tile)
         {
             tiles.Add(tile);
+            tile.ChangedCell(this);     // TODO: implement tile.ChangedTile into tile base class
             tile.cell = this;
             tile.transform.parent = transform;
-            if (moveToCell)
-                tile.transform.position = transform.position;
         }
 
         public void AddTile(GameObject tileGO, bool moveToCell = true)
