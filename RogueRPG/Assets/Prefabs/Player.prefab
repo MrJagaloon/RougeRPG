@@ -110,7 +110,7 @@ MonoBehaviour:
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
-  damagePerHit: 2
+  damagePerHit: 34
   healthPerMove: 0
   healthPerFood: 100
   healthPerSoda: 50

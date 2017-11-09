@@ -12,6 +12,21 @@ public struct IntRange
         this.min = min;
         this.max = max;
     }
+
+    public bool InRange(int i)
+    {
+        return min <= i && i <= max;
+    }
+
+    public bool IsInRange(float f)
+    {
+        return min <= f && f <= max;
+    }
+
+    public override string ToString()
+    {
+        return string.Format("[IntRange: ({0}, {1})]", min, max);
+    }
 }
 
 [CustomPropertyDrawer(typeof(IntRange))]

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 using Random = System.Random;
+
 
 namespace CellAuto
 {
@@ -30,7 +32,7 @@ namespace CellAuto
 
         Cell[][] cells;
 
-        List<Zone> zones;
+        public List<Zone> zones { get; private set; }
 
         public Cell[] this[int key]
         {
@@ -221,7 +223,7 @@ namespace CellAuto
             if (zones.Count == 0)
                 return;
 
-            string log = "";
+            string log = "Pruning Zones\n";
 
             // Check that each zone has at least minEmptyZoneCells cells, and fill any that do not.
             for (int i = 0; i < zones.Count; ++i)
@@ -231,7 +233,7 @@ namespace CellAuto
                     zones[i].Fill();
 
                     // Nullify the zone to allow it to be removed later.
-                    log += "Pruned zone " + zones[i].number + "\n";
+                    log += "    Pruned zone " + zones[i].number + "\n";
                     zones[i] = null;
                 }
             }
@@ -245,11 +247,14 @@ namespace CellAuto
          */
         void ConnectEmptyZonesToMain(Random rnd)
         {
-            int mainZoneIndex = GetMainEmptyZoneIndex();
+            if (zones.Count == 0 || zones.Count == 1)
+                return;
+            
+            int mainZoneIndex = GetMainZoneIndex();
 
             Zone mainZone = zones[mainZoneIndex];
 
-            string log = "";
+            string log = "Connecting zones to main zone " + mainZoneIndex;
             for (int i = 0; i < zones.Count; ++i)
             {
                 if (i != mainZoneIndex)
@@ -258,7 +263,7 @@ namespace CellAuto
                     Cell originCell = originZone[rnd.Next(originZone.Count)];
                     Cell destinationCell = mainZone[rnd.Next(mainZone.Count)];
                     CreatePath(originCell, destinationCell);
-                    log += "Connected zone " + i + " to main zone " + mainZoneIndex + "\n";
+                    log += "    Connected zone " + i + "\n";
                 }
             }
             Debug.Log(log);
@@ -358,7 +363,7 @@ namespace CellAuto
             return multiplier * (Mathf.Abs(toCell.x - fromCell.x) + Mathf.Abs(toCell.y - fromCell.y));
         }
 
-        /* Return a list with the Von Neumann adjacent cells coordinates
+        /* Return a list with the Von Neumann adjacent cells.
          */
         List<Cell> GetAdjacentCells(Cell cell)
         {
@@ -385,7 +390,7 @@ namespace CellAuto
 
         /* Returns the index of the main zone, which is the largest zone
          */
-        int GetMainEmptyZoneIndex()
+        int GetMainZoneIndex()
         {
             int largestEZIndex = -1;
             int largestEZSize = 0;

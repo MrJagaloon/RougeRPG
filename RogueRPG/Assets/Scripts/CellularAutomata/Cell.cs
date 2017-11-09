@@ -9,15 +9,15 @@ namespace CellAuto
         public int x { get; private set; }
         public int y { get; private set; }
 
-        public CellState state { get; private set; }
+        public CellState state;
         public int zoneNumber;
 
-        public Cell(int x, int y, CellState state = CellState.EMPTY, int zone = -1)
+        public Cell(int x, int y, CellState state = CellState.EMPTY, int zoneNumber = -1)
         {
             this.x = x;
             this.y = y;
             this.state = state;
-            this.zoneNumber = zone;
+            this.zoneNumber = zoneNumber;
         }
 
         public bool IsFilled()

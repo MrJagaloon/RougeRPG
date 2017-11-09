@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4093674483854218}
   - component: {fileID: 114964878994426084}
-  - component: {fileID: 114698790979752468}
+  - component: {fileID: 114063035822631868}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114698790979752468
+--- !u!114 &114063035822631868
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,16 +49,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1998999139519572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357e23b869ad4438eb9d6209e6e6c96e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a0a66608db2b4e57ab0c7d3b27aabb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEdgeSize: 32
+  maxEdgeSize: 64
   maxAspectRatio: 2
-  edgeSize: 5
-  outerWallChance: 0
+  edgeSize: 10
+  edgeChanceMod: 1.25
+  exitSpawnAttempts: 25
   enemySpawnAttempts: 100
-  exitTiles:
-  - {fileID: 1283729602775716, guid: 4875bdb86f6aa435486396b10d8dc452, type: 2}
+  foodSpawnCycleAttempts: 10
+  foodSpawnAttempts: 100
+  exitDistanceRange:
+    min: 32
+    max: 128
+  foodRange:
+    min: 3
+    max: 6
+  entryTilePrefab: {fileID: 1788054286653524, guid: 93043c1ef0cab40f49d79905af7173a9,
+    type: 2}
+  exitTilePrefab: {fileID: 1283729602775716, guid: 4875bdb86f6aa435486396b10d8dc452,
+    type: 2}
   floorTiles:
   - {fileID: 1795368879777020, guid: a9e9545fbcc42425e9dacac4c3e577cd, type: 2}
   - {fileID: 1649899732570756, guid: 02014b6912deb45389acdff04161431b, type: 2}
@@ -82,8 +93,8 @@ MonoBehaviour:
   - {fileID: 1540909793484260, guid: 947154859fe4b48419275dbabbfeb3ff, type: 2}
   - {fileID: 1266703447135384, guid: 59ba86453b3dd43718a0e1c15fdce151, type: 2}
   foodTiles:
-  - {fileID: 1904733593880476, guid: 15faa88951e8c4d0cadd04f44a91aaeb, type: 2}
   - {fileID: 1950604708809162, guid: 4cce4c1c577ad481b93693865460a525, type: 2}
+  - {fileID: 1904733593880476, guid: 15faa88951e8c4d0cadd04f44a91aaeb, type: 2}
   enemyTiles:
   - {fileID: 1820174669036892, guid: 817189b4de5774536a5b12329fee9fb3, type: 2}
   - {fileID: 1776708960903746, guid: e7eacf301b7ba4bdb90495cacda6ea47, type: 2}
@@ -92,9 +103,9 @@ MonoBehaviour:
     generateZones: 1
     pruneZones: 1
     connectZonesToMain: 1
-    minEmptyZoneSize: 16
+    minEmptyZoneSize: 8
     emptyStepCost: 1
-    filledStepCost: 4
+    filledStepCost: 32
     fillChance: 50
     fillRules:
       ruleType: 8
@@ -113,20 +124,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d5c6560cd1046d0b30b73cc236850d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 0
   difficulty: 4
-  seedString: 4
+  seedString: 
   levelStartDelay: 2
   nextLevelDelay: 1
   turnDelay: 0.1
-  playerHealth: 500
+  playerHealth: 200
   playerPrefab: {fileID: 1700324380147446, guid: f0f388a6b780946988fdad54e780fb1e,
     type: 2}
-  playerInstance: {fileID: 0}
   playerScript: {fileID: 0}
-  camSize: 12.5
+  camSize: 5
   camSizeRange:
     min: 2
-    max: 32
+    max: 8
   zoomSpeed: 25
   playersTurn: 1

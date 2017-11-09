@@ -19,6 +19,16 @@ namespace Board
             set { tiles[i] = value; }
         }
 
+        public bool IsBlocking 
+        {
+            get
+            {
+                foreach (Tile t in tiles)
+                    if (t.isBlocking) return true;
+                return false;
+            }
+        }
+
         public static Cell NewCell(int x, int y)
         {
             GameObject cellGO = new GameObject("Cell(" + x + ", " + y + ")");
@@ -30,15 +40,16 @@ namespace Board
             return cell;
         }
 
-        public void AddTile(Tile tile, bool moveToCell = false)
+        public void AddTile(Tile tile, bool moveToCell = true)
         {
             tiles.Add(tile);
+            tile.cell = this;
             tile.transform.parent = transform;
             if (moveToCell)
                 tile.transform.position = transform.position;
         }
 
-        public void AddTile(GameObject tileGO, bool moveToCell = false)
+        public void AddTile(GameObject tileGO, bool moveToCell = true)
         {
             AddTile(tileGO.GetComponent<Tile>(), moveToCell);
         }
@@ -73,6 +84,26 @@ namespace Board
             {
                 tile.Collision(c);
             }
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other == null || GetType() != other.GetType())
+                return false;
+
+            Cell otherCell = (Cell)other;
+
+            return x == otherCell.x && y == otherCell.y;
+        }
+
+        public override int GetHashCode()
+        {
+            return x * y + (x + 1) * (y + 1) * (y + 2);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[Cell: ({0}, {1})]", x, y);
         }
     }
 }

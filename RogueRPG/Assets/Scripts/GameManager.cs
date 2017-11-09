@@ -18,19 +18,20 @@ public class GameManager : MonoBehaviour
 
     public int playerHealth = 100;
     public GameObject playerPrefab;
-    public GameObject playerInstance;
+    [HideInInspector]
     public Player playerScript;
 
     public float camSize = 5f;
     public IntRange camSizeRange;
     public float zoomSpeed = 1f;
 
-    System.Random rnd;
-    public System.Random Rnd { get { return rnd; } }
+    Random rnd;
+    public Random Rnd { get { return rnd; } }
 
     [HideInInspector] public bool playersTurn = true;
 
     Text levelText;
+    Text inGameLevelText;
     GameObject levelImage;
     bool doingSetup;
 
@@ -76,7 +77,9 @@ public class GameManager : MonoBehaviour
 
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        inGameLevelText = GameObject.Find("InGameLevelText").GetComponent<Text>();
         levelText.text = "Day " + level;
+        inGameLevelText.text = "Day " + level; 
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
 
@@ -84,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         boardManager.SetupScene(level);
 
-        playerInstance = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        GameObject playerInstance = boardManager.SpawnPlayerAtEntry();
         playerScript = playerInstance.GetComponent<Player>();
 
         Camera.main.orthographicSize = camSize;
@@ -139,8 +142,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < enemies.Count; ++i)
         {
             enemies[i].MoveEnemy();
-
-            //yield return new WaitForSeconds(enemies[i].moveTime);
         }
 
         yield return new WaitForSeconds(turnDelay);

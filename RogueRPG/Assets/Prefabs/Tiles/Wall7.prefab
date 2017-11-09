@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagedSprite: {fileID: 21300106, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
-  hp: 4
+  hp: 100
 --- !u!114 &114672801640252118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc9b29d69798422d9f578781a37e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlocking: 1
 --- !u!212 &212767578276630064
 SpriteRenderer:
   m_ObjectHideFlags: 1
