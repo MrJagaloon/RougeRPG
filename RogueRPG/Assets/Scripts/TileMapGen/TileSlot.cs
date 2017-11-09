@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Board
+namespace TileMapGen
 {
     [RequireComponent(typeof(Transform))]
-    public class Cell : MonoBehaviour
+    public class TileSlot : MonoBehaviour
     {
         public IntPoint2 position;
 
@@ -18,16 +18,16 @@ namespace Board
             set { tiles[i] = value; }
         }
 
-        public static Cell NewCell(IntPoint2 position)
+        public static TileSlot NewTileSlot(IntPoint2 position)
         {
-            GameObject cellGO = new GameObject(string.Format("Cell({0}, {1})", position.x, position.y));
-            Cell cell = cellGO.AddComponent<Cell>();
+            GameObject cellGO = new GameObject(string.Format("TileSlot({0}, {1})", position.x, position.y));
+            TileSlot cell = cellGO.AddComponent<TileSlot>();
             cell.position = position;
             cell.tiles = new List<Tile>();
             cell.transform.position = new Vector3(x, y, 0f);
             return cell;
         }
-        public static Cell NewCell(int x, int y)
+        public static TileSlot NewCell(int x, int y)
         {
             return NewCell(new IntPoint2(x, y));
         }
@@ -40,11 +40,6 @@ namespace Board
             tile.transform.parent = transform;
         }
 
-        public void AddTile(GameObject tileGO, bool moveToCell = true)
-        {
-            AddTile(tileGO.GetComponent<Tile>(), moveToCell);
-        }
-
         public void RemoveTile(Tile tile)
         {
             bool wasRemoved = tiles.Remove(tile);
@@ -54,12 +49,12 @@ namespace Board
                 throw new System.Exception("tile");
         }
 
-        public void RemoveTile(int i)
+        public void RemoveTileAt(int i)
         {
             tiles.RemoveAt(i);
         }
 
-        public int GetTileIndex(GameObject tile)
+        public int GetTileIndex(Tile tile)
         {
             for (int i = 0; i < tiles.Count; ++i)
             {
@@ -69,20 +64,12 @@ namespace Board
             return -1;
         }
 
-        public void Collision(ICollider c)
-        {
-            foreach (Tile tile in tiles)
-            {
-                tile.Collision(c);
-            }
-        }
-
         public override bool Equals(object other)
         {
             if (other == null || GetType() != other.GetType())
                 return false;
 
-            Cell otherCell = (Cell)other;
+            TileSlot otherCell = (TileSlot)other;
 
             return x == otherCell.x && y == otherCell.y;
         }
