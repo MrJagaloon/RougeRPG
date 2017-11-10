@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System;
 
-public struct IntPoint2
+public struct IntPoint2 : IComparable, IComparable<IntPoint2>
 {
     public int x;
     public int y;
@@ -13,7 +14,7 @@ public struct IntPoint2
                 return x;
             if (i == 1)
                 return y;
-            throw new System.IndexOutOfRangeException("Index");
+            throw new IndexOutOfRangeException("Index");
         }
         set 
         {
@@ -26,7 +27,7 @@ public struct IntPoint2
                     y = value;
                     break;
                 default:
-                    throw new System.IndexOutOfRangeException("Index");
+                    throw new IndexOutOfRangeException("Index");
             }
         }
     }
@@ -59,6 +60,27 @@ public struct IntPoint2
 
     public override int GetHashCode()
     {
-        return x * y + x * x + y * y;
+        int hash = 17;
+        // Suitable nullity checks etc, of course :)
+        hash = hash * 23 + x.GetHashCode();
+        hash = hash * 23 + y.GetHashCode();
+        return hash;
+    }
+
+    public int CompareTo(IntPoint2 other)
+    {
+        if (x != other.x)
+            return x - other.x;
+        if (y != other.y)
+            return y - other.y;
+        return 0;
+    }
+
+    public int CompareTo(object obj)
+    {
+        if (obj != null && !(obj is IntPoint2))
+            throw new ArgumentException("Object must be of type IntPoint2.");
+
+        return CompareTo((IntPoint2)obj);
     }
 }
