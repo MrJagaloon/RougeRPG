@@ -5,13 +5,13 @@ using TileMapLib.TileMaps.Generators;
 
 public class TileMapTester : MonoBehaviour
 {
-    ITileMapGenerator generator;
+    RougeCaveTileMapGenerator generator;
 
     public string seed;
 
 	void Start ()
     {
-        generator = GetComponent<ITileMapGenerator>();
+        generator = GetComponent<RougeCaveTileMapGenerator>();
 
         if (string.IsNullOrEmpty(seed))
             seed = System.DateTime.Now.ToString();
