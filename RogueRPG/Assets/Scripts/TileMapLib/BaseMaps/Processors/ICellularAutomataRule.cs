@@ -3,6 +3,6 @@ namespace TileMapLib.BaseMaps.Processors
 {
     public interface ICellularAutomataRule
     {
-        bool NextCellState(BaseMap<bool> map, int x, int y);
+        int NextCellState(BaseMap map, int x, int y);
     }
 }

@@ -208,11 +208,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 128
   cols: 128
+  cavernSize:
+    min: 128
+    max: 8192
   stepsPerRules: 0a0000000a000000
   rules:
   - bornRules: 000000000000010101
-    surviveRules: 000001010101010101
-  - bornRules: 000000000000000101
+    surviveRules: 000000010101010101
+  - bornRules: 000000000001010101
     surviveRules: 000000000101010101
   initFullProb: 0.5
   floorTileSet:
@@ -244,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3654628fce49339a50d411e8e5b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 
+  seed: 0
 --- !u!4 &1085630516
 Transform:
   m_ObjectHideFlags: 0

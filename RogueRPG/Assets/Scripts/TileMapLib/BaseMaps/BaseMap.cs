@@ -2,46 +2,55 @@
 
 namespace TileMapLib.BaseMaps
 {
-    public class BaseMap<T>
+    public class BaseMap
     {
-        int _rows;
-        int _cols;
-        T[][] map;
+        public readonly int rows;
+        public readonly int cols;
+        protected readonly int[][] map;
 
-        public int Rows { get { return _rows; } }
-        public int Cols { get { return _cols; } }
-        public T[] this[int i]
+        public BaseMap (int rows, int cols, int defaultValue = 0)
         {
-            get { return map[i]; }
-            set { map[i] = value; }
-        }
+            this.rows = rows;
+            this.cols = cols;
 
-        public BaseMap (int rows, int cols, T initValue = default(T))
-        {
-            _rows = rows;
-            _cols = cols;
-
-            map = new T[cols][];
-            for (int x = 0; x < Cols; ++x) 
+            map = new int[cols][];
+            for (int x = 0; x < cols; ++x) 
             {
-                map[x] = new T[rows];
-                for (int y = 0; y < Rows; ++y)
+                map[x] = new int[rows];
+                for (int y = 0; y < rows; ++y)
                 {
-                    map[x][y] = initValue;
+                    map[x][y] = defaultValue;
                 }
             }
         }
 
-        public BaseMap<T> Copy()
+        public virtual void SetPosition(IntPoint2 position, int value)
         {
-            BaseMap<T> copy = new BaseMap<T>(Rows, Cols);
+            map[position.x][position.y] = value;
+        }
+        public virtual void SetPosition(int x, int y, int value)
+        {
+            map[x][y] = value;
+        }
 
-            for (int x = 0; x < Cols; ++x)
+        public virtual int GetPosition(IntPoint2 position)
+        {
+            return map[position.x][position.y];
+        }
+        public virtual int GetPosition(int x, int y)
+        {
+            return map[x][y];
+        }
+
+        public BaseMap Copy()
+        {
+            BaseMap copy = new BaseMap(rows, cols);
+
+            for (int x = 0; x < cols; ++x)
             {
-                copy[x] = new T[Rows];
-                for (int y = 0; y < Rows; ++y)
+                for (int y = 0; y < rows; ++y)
                 {
-                    copy[x][y] = map[x][y];
+                    copy.SetPosition(x, y, map[x][y]);
                 }
             }
 
