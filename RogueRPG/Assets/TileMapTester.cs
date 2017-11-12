@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TileMapLib.TileMaps.Generators;
+using TileMapLib.TileMaps;
 
 public class TileMapTester : MonoBehaviour
 {

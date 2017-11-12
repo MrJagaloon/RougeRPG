@@ -1,8 +1,8 @@
 ﻿using System;
-namespace TileMapLib.BaseMaps.Processors
+namespace TileMapLib.BaseMaps
 {
     public interface ICellularAutomataRule
     {
-        int NextCellState(BaseMap map, int x, int y);
+        bool NextCellState(BaseMap<bool> map, int x, int y);
     }
 }

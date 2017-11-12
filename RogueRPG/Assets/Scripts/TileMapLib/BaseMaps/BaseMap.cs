@@ -2,55 +2,63 @@
 
 namespace TileMapLib.BaseMaps
 {
-    public class BaseMap
+    public abstract class BaseMap
     {
         public readonly int rows;
         public readonly int cols;
-        protected readonly int[][] map;
 
-        public BaseMap (int rows, int cols, int defaultValue = 0)
+        protected BaseMap(int rows, int cols)
         {
             this.rows = rows;
             this.cols = cols;
+        }
+    }
 
-            map = new int[cols][];
+    public class BaseMap<T> : BaseMap
+    {
+        protected readonly T[][] cells;
+
+        public BaseMap (int rows, int cols, T defaultValue = default(T)) : base(rows, cols)
+        {
+            cells = new T[cols][];
             for (int x = 0; x < cols; ++x) 
             {
-                map[x] = new int[rows];
+                cells[x] = new T[rows];
                 for (int y = 0; y < rows; ++y)
                 {
-                    map[x][y] = defaultValue;
+                    cells[x][y] = defaultValue;
                 }
             }
         }
 
-        public virtual void SetPosition(IntPoint2 position, int value)
+        public void SetCellValue(IntPoint2 position, T value)
         {
-            map[position.x][position.y] = value;
+            cells[position.x][position.y] = value;
         }
-        public virtual void SetPosition(int x, int y, int value)
+        public void SetCellValue(int x, int y, T value)
         {
-            map[x][y] = value;
-        }
-
-        public virtual int GetPosition(IntPoint2 position)
-        {
-            return map[position.x][position.y];
-        }
-        public virtual int GetPosition(int x, int y)
-        {
-            return map[x][y];
+            cells[x][y] = value;
         }
 
-        public BaseMap Copy()
+        public T GetCellValue(IntPoint2 position)
         {
-            BaseMap copy = new BaseMap(rows, cols);
+            return cells[position.x][position.y];
+        }
+        public T GetCellValue(int x, int y)
+        {
+            return cells[x][y];
+        }
+
+        public BaseMap<T> Copy()
+        {
+            BaseMap<T> copy = new BaseMap<T>(rows, cols);
 
             for (int x = 0; x < cols; ++x)
             {
                 for (int y = 0; y < rows; ++y)
                 {
-                    copy.SetPosition(x, y, map[x][y]);
+                    copy.SetCellValue(x, y, cells[x][y]);
+
                 }
             }
 

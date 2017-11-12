@@ -1,27 +1,36 @@
 ﻿using System;
 
-namespace TileMapLib.ZoneMaps.Processors
+namespace TileMapLib.ZoneMaps
 {
     public static class PruneZonesZMP
     {
-        // Remove any zones whose position count is not within keepRange.
-        public static ZoneMap PruneZones(ZoneMap zoneMap, IntRange keepRange)
+        // Remove any zones whose count is not within keepRange.
+        public static void PruneZones<T>(ZoneMap<T> zoneMap, IntRange keepRange)
         {
-            ZoneMap prunedZoneMap = new ZoneMap(zoneMap.rows, zoneMap.cols);
             foreach (Zone zone in zoneMap)
             {
                 // Check if the number of positions in the zone is within range.
-                if (keepRange.IsInRange(zone.Count))
+                if (!keepRange.IsInRange(zone.Count))
                 {
-                    // Keep the zone
-                    int zoneNumber = prunedZoneMap.NewZone();
-                    foreach (IntPoint2 position in zone)
-                    {
-                        prunedZoneMap.SetPosition(position, zoneNumber);
-                    }
+                    // Remove the zone.
+                    zoneMap.RemoveZone(zone.number);
                 }
             }
-            return prunedZoneMap;
+        }
+
+        // Fill and remove any zones whose count is not within keepRange.
+        public static void PruneAndFillZones<T>(ZoneMap<T> zoneMap, IntRange keepRange, T fillValue)
+        {
+            foreach (Zone zone in zoneMap)
+            {
+                // Check if the number of positions in the zone is within range.
+                if (!keepRange.IsInRange(zone.Count))
+                {
+                    // Remove the zone.
+                    zoneMap.FillZone(zone.number, fillValue);
+                    zoneMap.RemoveZone(zone.number);
+                }
+            }
         }
     }
 }

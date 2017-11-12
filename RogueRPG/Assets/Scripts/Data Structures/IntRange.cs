@@ -13,14 +13,14 @@ public struct IntRange
         this.max = max;
     }
 
-    public bool InRange(int i)
-    {
-        return min <= i && i <= max;
-    }
-
     public bool IsInRange(float f)
     {
         return min <= f && f <= max;
+    }
+
+    public float Difference()
+    {
+        return max - min;
     }
 
     public override string ToString()
@@ -30,7 +30,7 @@ public struct IntRange
 }
 
 [CustomPropertyDrawer(typeof(IntRange))]
-public class RangeValueInpector : PropertyDrawer
+public class IntRangeValueInpector : PropertyDrawer
 {
     bool expanded;
 

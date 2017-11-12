@@ -6,56 +6,71 @@ namespace TileMapLib.ZoneMaps
 {
     public class Zone : IEnumerable
     {
-        readonly List<IntPoint2> positions;
+        readonly List<IntPoint2> cellPositions;
 
-        public readonly int zoneNumber;
+        public readonly int number;
 
-        public int Count { get { return positions.Count; } }
+        public int Count { get { return cellPositions.Count; } }
 
         public IntPoint2 this[int i]
         {
-            get { return positions[i]; }
+            get { return cellPositions[i]; }
         }
 
-        public Zone(int zoneNumber)
+        public Zone(int number)
         {
-            positions = new List<IntPoint2>();
-            this.zoneNumber = zoneNumber;
+            cellPositions = new List<IntPoint2>();
+            this.number = number;
         }
 
-        public int AddPosition(IntPoint2 position)
+        public int AddCellPosition(IntPoint2 cellPosition)
         {
-            int index = -(positions.BinarySearch(position)) - 1;
+            int index = -(cellPositions.BinarySearch(cellPosition)) - 1;
 
             if (index < 0)
-                throw new Exception("Node already exists.");
+                throw new Exception("Cell already exists in zone.");
             
-            positions.Insert(index, position);
+            cellPositions.Insert(index, cellPosition);
 
             return index;
         }
-        public int AddPosition(int x, int y)
+        public int AddCellPosition(int x, int y)
         {
-            return AddPosition(new IntPoint2(x, y));
+            return AddCellPosition(new IntPoint2(x, y));
         }
 
-        public int GetPositionIndex(IntPoint2 position)
+        public int GetCellPositionIndex(IntPoint2 cellPosition)
         {
-            return positions.BinarySearch(position);
+            return cellPositions.BinarySearch(cellPosition);
         }
-        public int GetPositionIndex(int x, int y)
+        public int GetCellPositionIndex(int x, int y)
         {
-            return GetPositionIndex(new IntPoint2(x, y));
+            return GetCellPositionIndex(new IntPoint2(x, y));
         }
 
-        public void RemovePositionAt(int index)
+        public void RemoveCellAt(int index)
         {
-            positions.RemoveAt(index);
+            cellPositions.RemoveAt(index);
+        }
+
+        public void RemoveCell(IntPoint2 position)
+        {
+            int cellIndex = GetCellPositionIndex(position);
+
+            // Check that the cell is within this zone.
+            if (cellIndex < 0)
+                throw new Exception(string.Format("Cant remove cell at {0} because it is not within zone {1}.", position, number));
+
+            RemoveCellAt(cellIndex);
+        }
+        public void RemoveCell(int x, int y)
+        {
+            RemoveCell(new IntPoint2(x, y));
         }
 
         public IEnumerator GetEnumerator()
         {
-            return ((IEnumerable)positions).GetEnumerator();
+            return ((IEnumerable)cellPositions).GetEnumerator();
         }
     }
 }

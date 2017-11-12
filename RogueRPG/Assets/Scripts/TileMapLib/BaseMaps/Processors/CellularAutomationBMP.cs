@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TileMapLib.BaseMaps.Processors
+namespace TileMapLib.BaseMaps
 {
     public static class CellularAutomationBMP
     {
-        public static BaseMap Process(BaseMap originalMap, int steps, ICellularAutomataRule rule, System.Random rnd = null)
+        public static BaseMap<bool> Process(BaseMap<bool> originalMap, int steps, ICellularAutomataRule rule, System.Random rnd = null)
         {
             if (rnd == null)
             {
@@ -13,16 +13,16 @@ namespace TileMapLib.BaseMaps.Processors
                 rnd = new System.Random(seed);
             }
 
-            BaseMap map = originalMap.Copy();
+            BaseMap<bool> map = originalMap.Copy();
 
             for (int i = 0; i < steps; ++i)
             {
-                BaseMap oldMap = map.Copy();
+                BaseMap<bool> oldMap = map.Copy();
                 for (int x = 0; x < originalMap.cols; ++x)
                 {
                     for (int y = 0; y < originalMap.rows; ++y)
                     {
-                        map.SetPosition(x, y, rule.NextCellState(oldMap, x, y));
+                        map.SetCellValue(x, y, rule.NextCellState(oldMap, x, y));
                     }
                 }
             }

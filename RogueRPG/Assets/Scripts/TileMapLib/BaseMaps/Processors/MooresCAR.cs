@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace TileMapLib.BaseMaps.Processors
+namespace TileMapLib.BaseMaps
 {
     [System.Serializable]
     public class MooresCAR : ICellularAutomataRule
@@ -17,35 +17,23 @@ namespace TileMapLib.BaseMaps.Processors
 
         /* Return the new state that the cell should have
          */
-        public int NextCellState(BaseMap map, int x, int y)
+        public bool NextCellState(BaseMap<bool> map, int x, int y)
         {
-            int adjFullCount = GetAdjacentFullCount(map, x, y);
+            int adjFullCount = GetAdjacentTrueCount(map, x, y);
 
-            int cell = map.GetPosition(x, y);
+            bool cell = map.GetCellValue(x, y);
 
             // Check if full
-            if (cell != 0)
-            {
+            if (cell)
                 // Cell is full, check if it should survive.
-                bool survive = surviveRules[adjFullCount];
-                if (!survive)
-                {
-                    cell = 0;
-                }
-            }
+                cell = surviveRules[adjFullCount];
             else
-            {
                 // Cell is empty, check if it should be born.
-                bool born = bornRules[adjFullCount];
-                if (born)
-                {
-                    cell = 1;
-                }
-            }
+                cell = bornRules[adjFullCount];
             return cell;
         }
 
-        int GetAdjacentFullCount(BaseMap map, int x, int y)
+        int GetAdjacentTrueCount(BaseMap<bool> map, int x, int y)
         {
             int count = 0;
             for (int adjX = x - 1; adjX <= x + 1; ++adjX)
@@ -59,7 +47,7 @@ namespace TileMapLib.BaseMaps.Processors
                     if (adjX < 0 || adjX >= map.cols || adjY < 0 || adjY >= map.rows)
                         ++count;
 
-                    else if (map.GetPosition(adjX, adjY) != 0)
+                    else if (map.GetCellValue(adjX, adjY) == true)
                         ++count;
                 }
             }

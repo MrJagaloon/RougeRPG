@@ -209,7 +209,7 @@ MonoBehaviour:
   rows: 128
   cols: 128
   cavernSize:
-    min: 128
+    min: 32
     max: 8192
   stepsPerRules: 0a0000000a000000
   rules:

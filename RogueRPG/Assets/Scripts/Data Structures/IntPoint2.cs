@@ -45,14 +45,17 @@ public struct IntPoint2 : IComparable, IComparable<IntPoint2>
 
     public override string ToString()
     {
-        return string.Format("(x={0}, y={1}]", x, y);
+        return string.Format("({0}, {1})", x, y);
     }
 
     public override bool Equals(object obj)
     {
-        if (obj == null || GetType() != obj.GetType())
+        if (obj != null && !(obj is IntPoint2))
+            throw new ArgumentException("Object must be of type IntPoint2.");
+
+        if (obj == null)
             return false;
-        
+
         IntPoint2 other = (IntPoint2)obj;
 
         return x == other.x && y == other.y;

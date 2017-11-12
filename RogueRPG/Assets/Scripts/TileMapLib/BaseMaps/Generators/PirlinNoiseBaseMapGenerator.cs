@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace TileMapLib.BaseMaps.Generators
+namespace TileMapLib.BaseMaps
 {
     public class PirlinNoiseBaseMapGenerator
     {

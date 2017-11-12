@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
 using TileMapLib.BaseMaps;
-using TileMapLib.BaseMaps.Processors;
-using TileMapLib.BaseMaps.Generators;
 using TileMapLib.ZoneMaps;
-using TileMapLib.ZoneMaps.Generators;
-using TileMapLib.ZoneMaps.Processors;
 
-namespace TileMapLib.TileMaps.Generators
+namespace TileMapLib.TileMaps
 {
     public class RougeCaveTileMapGenerator : MonoBehaviour
     {
@@ -30,19 +26,19 @@ namespace TileMapLib.TileMaps.Generators
                 throw new System.Exception("stepsPerRules.Length must equal rules.Length");
             System.Random rnd = new System.Random(seed);
 
-            BaseMap fillMap = WhiteNoiseBMG.Generate(rows, cols, new IntRange(0, 1), rnd);
+            BaseMap<bool> fillMap = WhiteNoiseBMG.GenerateBoolNoise(rows, cols, rnd);
 
             for (int i = 0; i < rules.Length; ++i)
             {
                 fillMap = CellularAutomationBMP.Process(fillMap, stepsPerRules[i], rules[i]);
-
             }
 
             TileMap map = TileMap.NewTileMap(rows, cols);
 
-            ZoneMap caverns = new ZoneMap(rows, cols);
-            caverns = FloodFillZMG.Generate(fillMap, 0);
-            caverns = PruneZonesZMP.PruneZones(caverns, cavernSize);
+            ZoneMap<bool> caverns = FloodFillZMG.Generate(fillMap, false);
+            Debug.Log(caverns.Count);
+            PruneZonesZMP.PruneAndFillZones(caverns, cavernSize, true);
+            Debug.Log(caverns.Count);
 
             // Add floor and wall tiles
             for (int x = 0; x < cols; ++x)
@@ -50,7 +46,7 @@ namespace TileMapLib.TileMaps.Generators
                 for (int y = 0; y < rows; ++y)
                 {
                     // Zoned positions are floors.
-                    GameObject[] tileSet = caverns.GetPosition(x, y) >= 0 ? floorTileSet : wallTileSet;
+                    GameObject[] tileSet = fillMap.GetCellValue(x, y) ? wallTileSet : floorTileSet;
                     int tileIndex = rnd.Next(tileSet.Length);
                     Tile.InstatiateTile(tileSet[tileIndex], map[x][y]);
                 }
